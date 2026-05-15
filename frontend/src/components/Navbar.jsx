@@ -1,9 +1,13 @@
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
+import { AppBar, Toolbar, Typography, Button, Box, IconButton, Tooltip } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { useAuth } from '../context/AuthContext'
 
 export default function Navbar() {
     const location = useLocation()
+    const navigate = useNavigate()
+    const { user, logout } = useAuth()
 
     const links = [
         { label: 'Inicio', to: '/', icon: <HomeIcon fontSize="small" /> },
@@ -13,20 +17,28 @@ export default function Navbar() {
         { label: 'Reportes', to: '/reportes' },
     ]
 
+    const handleLogout = () => {
+        logout()
+        navigate('/login')
+    }
+
     return (
-        <AppBar position="fixed">
+        <AppBar position="fixed" sx={{ bgcolor: '#6C8EAD', borderBottom: '1px solid #5a7a9a', boxShadow: 'none' }}>
             <Toolbar>
+                {/* Título redirige a homne */}
                 <Box
                     component={Link}
                     to="/"
                     sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none', flexGrow: 1 }}
                 >
-                    <Typography variant="h6" sx={{ color: 'common.white', fontWeight: 700 }}>
+                    <MusicNoteIcon sx={{ color: '#D4D6B9', mr: 0.5 }} />
+                    <Typography variant="h6" sx={{ color: '#ffffff', fontWeight: 700 }}>
                         Tienda Musical
                     </Typography>
                 </Box>
 
-                <Box sx={{ display: 'flex', gap: 1 }}>
+                {/* Links */}
+                <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
                     {links.map(link => (
                         <Button
                             key={link.to}
@@ -34,17 +46,29 @@ export default function Navbar() {
                             to={link.to}
                             startIcon={link.icon || null}
                             sx={{
-                                color: 'common.white',
-                                fontWeight: location.pathname === link.to ? 700 : 400,
-                                borderBottom: location.pathname === link.to ? '2px solid rgba(255,255,255,0.8)' : '2px solid transparent',
-                                borderRadius: 0,
-                                opacity: location.pathname === link.to ? 1 : 0.75,
-                                '&:hover': { opacity: 1, bgcolor: 'rgba(255,255,255,0.12)' },
+                                color: location.pathname === link.to ? '#ffffff' : '#D4D6B9cc',
+                                fontWeight: location.pathname === link.to ? 600 : 400,
+                                textTransform: 'none',
+                                '&:hover': { color: '#ffffff', bgcolor: '#ffffff20' }
                             }}
                         >
                             {link.label}
                         </Button>
                     ))}
+
+                    {/* Usuario y opcion de logout  */}
+                    {user && (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2, pl: 2, borderLeft: '1px solid #ffffff30' }}>
+                            <Typography sx={{ color: '#D4D6B9', fontSize: 13 }}>
+                                {user.nombre}
+                            </Typography>
+                            <Tooltip title="Cerrar sesión">
+                                <IconButton onClick={handleLogout} size="small" sx={{ color: '#D4D6B9', '&:hover': { color: '#ffffff' } }}>
+                                    <LogoutIcon fontSize="small" />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                    )}
                 </Box>
             </Toolbar>
         </AppBar>

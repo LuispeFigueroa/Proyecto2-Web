@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import productos, clientes, ventas, reportes
+from routers import productos, clientes, ventas, reportes, auth
 
 app = FastAPI(title="Tienda LP")
 
@@ -15,7 +15,7 @@ app.include_router(productos.router, prefix="/productos", tags=["Productos"])
 app.include_router(clientes.router, prefix="/clientes", tags=["Clientes"])
 app.include_router(ventas.router, prefix="/ventas", tags=["Ventas"])
 app.include_router(reportes.router, prefix="/reportes", tags=["Reportes"])
-
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 @app.get("/")
 def root():
     return {"message": "Tienda LP en linea"}
