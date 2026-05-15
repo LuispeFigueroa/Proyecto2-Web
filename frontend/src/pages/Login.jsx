@@ -18,7 +18,7 @@ export default function Login() {
         setLoading(true)
         try {
             const res = await api.post('/auth/login', { username, password })
-            login(res.data)
+            login(res.data.user)
             navigate('/')
         } catch (err) {
             setError(err.response?.data?.message || 'Credenciales incorrectas')
