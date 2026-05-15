@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider as MuiThemeProvider } from '@mui/material'
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
 import App from './App'

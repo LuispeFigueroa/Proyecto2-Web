@@ -6,9 +6,11 @@ import {
 } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import api from '../api/axios'
+import { useAuth } from '../context/AuthContext'
 
 export default function Home() {
     const navigate = useNavigate()
+    const { user } = useAuth()
     const [ventas, setVentas] = useState([])
 
     useEffect(() => {
@@ -57,7 +59,7 @@ export default function Home() {
     return (
         <Box>
             <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 600, mb: 0.25 }}>
-                Bienvenido
+                Bienvenido, {user?.username || user?.nombre || 'Usuario'}
             </Typography>
             <Typography variant="body2" sx={{ color: 'secondary.main', fontWeight: 500, mb: 3 }}>
                 Tienda Musical LP

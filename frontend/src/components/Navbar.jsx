@@ -1,7 +1,8 @@
 import { AppBar, Toolbar, Typography, Button, Box, IconButton, Tooltip } from '@mui/material'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
 import LogoutIcon from '@mui/icons-material/Logout'
+import MusicNoteIcon from '@mui/icons-material/MusicNote'
 import { useAuth } from '../context/AuthContext'
 
 export default function Navbar() {
@@ -25,7 +26,6 @@ export default function Navbar() {
     return (
         <AppBar position="fixed" sx={{ bgcolor: '#6C8EAD', borderBottom: '1px solid #5a7a9a', boxShadow: 'none' }}>
             <Toolbar>
-                {/* Título redirige a homne */}
                 <Box
                     component={Link}
                     to="/"
@@ -37,7 +37,6 @@ export default function Navbar() {
                     </Typography>
                 </Box>
 
-                {/* Links */}
                 <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
                     {links.map(link => (
                         <Button
@@ -56,7 +55,6 @@ export default function Navbar() {
                         </Button>
                     ))}
 
-                    {/* Usuario y opcion de logout  */}
                     {user && (
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2, pl: 2, borderLeft: '1px solid #ffffff30' }}>
                             <Typography sx={{ color: '#D4D6B9', fontSize: 13 }}>
