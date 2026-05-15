@@ -73,6 +73,22 @@ export default function Reportes() {
         load(() => api.get(`/reportes/ventas-por-periodo?desde=${desde}&hasta=${hasta}`).then(r => setVentasPeriodo(r.data)))
     }
 
+    const exportarCSV = (datos, nombre) => {
+        if (!datos || datos.length === 0) return
+        const headers = Object.keys(datos[0]).join(',')
+        const rows = datos.map(row =>
+            Object.values(row).map(val => `"${val}"`).join(',')
+        ).join('\n')
+        const csv = `${headers}\n${rows}`
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `${nombre}.csv`
+        link.click()
+        URL.revokeObjectURL(url)
+    }
+
     const q = val => `Q${parseFloat(val || 0).toFixed(2)}`
 
     return (
