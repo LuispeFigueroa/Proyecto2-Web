@@ -1,22 +1,26 @@
 import { useState } from 'react'
 import {
     AppBar, Toolbar, Typography, Button, Box, IconButton,
-    Tooltip, useMediaQuery, useTheme, Drawer, List,
+    Tooltip, useMediaQuery, useTheme as useMuiTheme, Drawer, List,
     ListItem, ListItemButton, ListItemText
 } from '@mui/material'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuIcon from '@mui/icons-material/Menu'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Navbar() {
-    const theme = useTheme()
-    const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+    const muiTheme = useMuiTheme()
+    const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'))
     const [drawerOpen, setDrawerOpen] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
     const { user, logout } = useAuth()
+    const { mode, toggleTheme } = useTheme()
 
     const links = [
         { label: 'Inicio', to: '/', icon: <HomeIcon fontSize="small" /> },
@@ -32,7 +36,7 @@ export default function Navbar() {
     }
 
     return (
-        <AppBar position="fixed" sx={{ bgcolor: '#6C8EAD', borderBottom: '1px solid #5a7a9a', boxShadow: 'none' }}>
+        <AppBar position="fixed">
             <Toolbar>
                 <Box component={Link} to="/"
                     sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none', flexGrow: 1 }}>
@@ -43,6 +47,11 @@ export default function Navbar() {
 
                 {isMobile ? (
                     <>
+                        <Tooltip title={mode === 'light' ? 'Modo oscuro' : 'Modo claro'}>
+                            <IconButton onClick={toggleTheme} sx={{ color: '#ffffff', mr: 1 }}>
+                                {mode === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
+                            </IconButton>
+                        </Tooltip>
                         <IconButton onClick={() => setDrawerOpen(true)} sx={{ color: '#ffffff' }}>
                             <MenuIcon />
                         </IconButton>
@@ -83,8 +92,13 @@ export default function Navbar() {
                                 {link.label}
                             </Button>
                         ))}
+                        <Tooltip title={mode === 'light' ? 'Modo oscuro' : 'Modo claro'}>
+                            <IconButton onClick={toggleTheme} size="small" sx={{ color: '#D4D6B9', '&:hover': { color: '#ffffff' } }}>
+                                {mode === 'light' ? <Brightness4Icon fontSize="small" /> : <Brightness7Icon fontSize="small" />}
+                            </IconButton>
+                        </Tooltip>
                         {user && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2, pl: 2, borderLeft: '1px solid #ffffff30' }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 1, pl: 2, borderLeft: '1px solid #ffffff30' }}>
                                 <Typography sx={{ color: '#D4D6B9', fontSize: 13 }}>
                                     {user.nombre}
                                 </Typography>
