@@ -248,6 +248,25 @@ npm run lint
 
 ---
 
+## Pruebas unitarias
+
+El proyecto incluye pruebas unitarias con Vitest y React Testing Library.
+
+Para correr las pruebas:
+
+```bash
+cd frontend
+npm run test
+```
+
+### Pruebas incluidas
+
+| Prueba | Descripcion |
+|---|---|
+| Login renderiza el formulario | Verifica que los campos de usuario y contraseña se renderizan correctamente |
+| Login validacion campos vacios | Verifica que se muestra un mensaje de error al enviar el formulario sin credenciales |
+| VentaContext agrega productos | Verifica que el reducer agrega productos al carrito y calcula el total correctamente |
+
 ## Autor
 
 Luis Pedro Figueroa
