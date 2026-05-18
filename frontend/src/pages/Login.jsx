@@ -68,7 +68,7 @@ export default function Login() {
                         </Typography>
                     ))}
                     <Typography sx={{ fontSize: 11, color: '#9a9a80', mt: 1 }}>
-                        Cualquier contraseña es válida
+                        Todos los usuarios de prueba tienen la clave password123
                     </Typography>
                 </Box>
                 <Typography sx={{ fontSize: 13, color: '#6b6b55', textAlign: 'center', mt: 2 }}>
