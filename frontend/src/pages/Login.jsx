@@ -52,6 +52,25 @@ export default function Login() {
                         {loading ? 'Ingresando...' : 'Ingresar'}
                     </Button>
                 </Box>
+                <Box sx={{ mt: 3, p: 2, bgcolor: '#f5f5ee', borderRadius: 2, border: '1px solid #c8cab0' }}>
+                    <Typography sx={{ fontSize: 12, color: '#6b6b55', fontWeight: 500, mb: 1 }}>
+                        Usuarios de prueba
+                    </Typography>
+                    {[
+                        { user: 'cmendez', cargo: 'Gerente' },
+                        { user: 'sherrera', cargo: 'Vendedora' },
+                        { user: 'mtorres', cargo: 'Vendedor' },
+                        { user: 'agarcia', cargo: 'Cajera' },
+                        { user: 'rsilva', cargo: 'Vendedor' },
+                    ].map(u => (
+                        <Typography key={u.user} sx={{ fontSize: 12, color: '#42273B' }}>
+                            <strong>{u.user}</strong> — {u.cargo}
+                        </Typography>
+                    ))}
+                    <Typography sx={{ fontSize: 11, color: '#9a9a80', mt: 1 }}>
+                        Cualquier contraseña es válida
+                    </Typography>
+                </Box>
             </Paper>
         </Box>
     )

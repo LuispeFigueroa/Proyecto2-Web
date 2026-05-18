@@ -125,7 +125,7 @@ export default function Ventas() {
                 </Button>
             </Box>
 
-            <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: 'none', border: '1px solid #c8cab0' }}>
+            <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: 'none', border: '1px solid #c8cab0', overflowX: 'auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -201,7 +201,7 @@ export default function Ventas() {
                     </Box>
 
                     {items.length > 0 && (
-                        <TableContainer component={Paper} sx={{ boxShadow: 'none', border: '1px solid #e8e9d8', borderRadius: 2 }}>
+                        <TableContainer component={Paper} sx={{ boxShadow: 'none', border: '1px solid #e8e9d8', borderRadius: 3, overflowX: 'auto' }}>
                             <Table size="small">
                                 <TableHead>
                                     <TableRow>
@@ -268,7 +268,7 @@ export default function Ventas() {
                                 <Typography sx={{ fontSize: 13, color: '#6b6b55' }}>Fecha: <strong style={{ color: '#42273B' }}>{detalle.fecha}</strong></Typography>
                                 <Typography sx={{ fontSize: 13, color: '#DA7422', fontWeight: 600 }}>Total: {q(detalle.total)}</Typography>
                             </Box>
-                            <TableContainer component={Paper} sx={{ boxShadow: 'none', border: '1px solid #e8e9d8', borderRadius: 2 }}>
+                            <TableContainer component={Paper} sx={{ boxShadow: 'none', border: '1px solid #e8e9d8', borderRadius: 3, overflowX: 'auto' }}>
                                 <Table size="small">
                                     <TableHead>
                                         <TableRow>

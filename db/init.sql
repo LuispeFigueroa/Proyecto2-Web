@@ -193,32 +193,34 @@ INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_prov
 ('Interfaz de Audio Focusrite 2i2', 'Interfaz USB 2 entradas/salidas',         1800.00, 7,  6, 12);
  
 -- Empleados 
+-- Empleados (25)
 INSERT INTO empleados (nombre, cargo, email, fecha_contrato) VALUES
-('Pedro Juárez',      'Vendedor',       'pedro.j@tiendamusical.com',   '2022-01-10'),
-('Laura Coy',         'Vendedora',      'laura.c@tiendamusical.com',   '2022-03-15'),
-('Mario Sic',         'Vendedor',       'mario.s@tiendamusical.com',   '2023-06-01'),
-('Elena Choc',        'Cajera',         'elena.c@tiendamusical.com',   '2021-11-20'),
-('René Pac',          'Gerente',        'rene.p@tiendamusical.com',    '2020-05-01'),
-('Ingrid Batz',       'Vendedora',      'ingrid.b@tiendamusical.com',  '2024-02-12'),
-('Carlos Toj',        'Vendedor',       'carlos.t@tiendamusical.com',  '2023-08-01'),
-('Miriam Xoc',        'Vendedora',      'miriam.x@tiendamusical.com',  '2022-07-15'),
-('Diego Caal',        'Bodeguero',      'diego.c@tiendamusical.com',   '2021-03-10'),
-('Lucia Ixim',        'Cajera',         'lucia.i@tiendamusical.com',   '2023-01-20'),
-('Roberto Ajú',       'Vendedor',       'roberto.a@tiendamusical.com', '2024-05-01'),
-('Sandra Pop',        'Vendedora',      'sandra.p@tiendamusical.com',  '2022-09-12'),
-('Jorge Tzul',        'Técnico',        'jorge.t@tiendamusical.com',   '2021-06-18'),
-('Ana Cuc',           'Vendedora',      'ana.c@tiendamusical.com',     '2023-11-01'),
-('Felipe Boj',        'Vendedor',       'felipe.b@tiendamusical.com',  '2024-01-15'),
-('Rosa Chávez',       'Recepcionista',  'rosa.ch@tiendamusical.com',   '2020-08-20'),
-('Juan Morales',      'Vendedor',       'juan.m@tiendamusical.com',    '2022-12-01'),
-('Patricia Lima',     'Contadora',      'patricia.l@tiendamusical.com','2021-02-14'),
-('Héctor Saquic',     'Vendedor',       'hector.s@tiendamusical.com',  '2023-04-10'),
-('Verónica Coy',      'Vendedora',      'veronica.c@tiendamusical.com','2024-03-22'),
-('Óscar Tzep',        'Bodeguero',      'oscar.t@tiendamusical.com',   '2022-05-05'),
-('Blanca Xiloj',      'Vendedora',      'blanca.x@tiendamusical.com',  '2023-09-18'),
-('Ernesto Bac',       'Técnico',        'ernesto.b@tiendamusical.com', '2021-07-30'),
-('Karla Ajú',         'Vendedora',      'karla.a@tiendamusical.com',   '2024-06-01'),
-('Nelson Caal',       'Vendedor',       'nelson.c@tiendamusical.com',  '2022-10-15');
+('Carlos Mendez',      'Gerente',       'cmendez@tiendamusical.com',    '2020-01-15'),
+('Sofia Herrera',      'Vendedora',     'sherrera@tiendamusical.com',   '2020-03-10'),
+('Miguel Torres',      'Vendedor',      'mtorres@tiendamusical.com',    '2021-06-01'),
+('Ana Garcia',         'Cajera',        'agarcia@tiendamusical.com',    '2021-08-20'),
+('Roberto Silva',      'Vendedor',      'rsilva@tiendamusical.com',     '2022-01-10'),
+('Laura Castillo',     'Vendedora',     'lcastillo@tiendamusical.com',  '2022-03-15'),
+('Diego Ramirez',      'Bodeguero',     'dramirez@tiendamusical.com',   '2022-05-01'),
+('Valentina Cruz',     'Vendedora',     'vcruz@tiendamusical.com',      '2022-07-20'),
+('Andres Lopez',       'Vendedor',      'alopez@tiendamusical.com',     '2022-09-01'),
+('Gabriela Mora',      'Cajera',        'gmora@tiendamusical.com',      '2022-11-15'),
+('Kevin Johnson',      'Vendedor',      'kjohnson@tiendamusical.com',   '2023-01-10'),
+('Ashley Williams',    'Vendedora',     'awilliams@tiendamusical.com',  '2023-02-20'),
+('Brandon Smith',      'Tecnico',       'bsmith@tiendamusical.com',     '2023-04-01'),
+('Maria Gonzalez',     'Vendedora',     'mgonzalez@tiendamusical.com',  '2023-05-15'),
+('Daniel Martinez',    'Vendedor',      'dmartinez@tiendamusical.com',  '2023-07-01'),
+('Jessica Brown',      'Recepcionista', 'jbrown@tiendamusical.com',     '2023-08-10'),
+('Luis Reyes',         'Vendedor',      'lreyes@tiendamusical.com',     '2023-09-01'),
+('Emily Davis',        'Contadora',     'edavis@tiendamusical.com',     '2023-10-15'),
+('Fernando Ruiz',      'Vendedor',      'fruiz@tiendamusical.com',      '2023-11-01'),
+('Stephanie Wilson',   'Vendedora',     'swilson@tiendamusical.com',    '2024-01-10'),
+('Pablo Morales',      'Bodeguero',     'pmorales@tiendamusical.com',   '2024-02-01'),
+('Amanda Taylor',      'Vendedora',     'ataylor@tiendamusical.com',    '2024-03-15'),
+('Ricardo Vega',       'Tecnico',       'rvega@tiendamusical.com',      '2024-04-01'),
+('Monica Flores',      'Vendedora',     'mflores@tiendamusical.com',    '2024-05-10'),
+('James Anderson',     'Vendedor',      'janderson@tiendamusical.com',  '2024-06-01');
+
  
 -- Clientes 
 INSERT INTO clientes (nombre, email, telefono, direccion) VALUES
@@ -249,33 +251,34 @@ INSERT INTO clientes (nombre, email, telefono, direccion) VALUES
 ('Ricardo Boc',      'ric.b@gmail.com',      '5555-0025', 'Zona 17, Guatemala');
  
 -- Usuarios 
+-- Usuarios (25)
 INSERT INTO usuarios (username, password_hash, id_empleado) VALUES
-('pedro.j',     '$2b$12$placeholder_hash_pedro',     1),
-('laura.c',     '$2b$12$placeholder_hash_laura',     2),
-('mario.s',     '$2b$12$placeholder_hash_mario',     3),
-('elena.c',     '$2b$12$placeholder_hash_elena',     4),
-('rene.p',      '$2b$12$placeholder_hash_rene',      5),
-('ingrid.b',    '$2b$12$placeholder_hash_ingrid',    6),
-('carlos.t',    '$2b$12$placeholder_hash_carlost',   7),
-('miriam.x',    '$2b$12$placeholder_hash_miriam',    8),
-('diego.c',     '$2b$12$placeholder_hash_diegoc',    9),
-('lucia.i',     '$2b$12$placeholder_hash_luciai',    10),
-('roberto.a',   '$2b$12$placeholder_hash_robertoa',  11),
-('sandra.p',    '$2b$12$placeholder_hash_sandra',    12),
-('jorge.t',     '$2b$12$placeholder_hash_jorget',    13),
-('ana.c',       '$2b$12$placeholder_hash_anac',      14),
-('felipe.b',    '$2b$12$placeholder_hash_felipe',    15),
-('rosa.ch',     '$2b$12$placeholder_hash_rosa',      16),
-('juan.m',      '$2b$12$placeholder_hash_juanm',     17),
-('patricia.l',  '$2b$12$placeholder_hash_patricial', 18),
-('hector.s',    '$2b$12$placeholder_hash_hectors',   19),
-('veronica.c',  '$2b$12$placeholder_hash_veronica',  20),
-('oscar.t',     '$2b$12$placeholder_hash_oscart',    21),
-('blanca.x',    '$2b$12$placeholder_hash_blanca',    22),
-('ernesto.b',   '$2b$12$placeholder_hash_ernesto',   23),
-('karla.a',     '$2b$12$placeholder_hash_karlaa',    24),
-('nelson.c',    '$2b$12$placeholder_hash_nelson',    25);
- 
+('cmendez',    '$2b$12$abc123hash001', 1),
+('sherrera',   '$2b$12$abc123hash002', 2),
+('mtorres',    '$2b$12$abc123hash003', 3),
+('agarcia',    '$2b$12$abc123hash004', 4),
+('rsilva',     '$2b$12$abc123hash005', 5),
+('lcastillo',  '$2b$12$abc123hash006', 6),
+('dramirez',   '$2b$12$abc123hash007', 7),
+('vcruz',      '$2b$12$abc123hash008', 8),
+('alopez',     '$2b$12$abc123hash009', 9),
+('gmora',      '$2b$12$abc123hash010', 10),
+('kjohnson',   '$2b$12$abc123hash011', 11),
+('awilliams',  '$2b$12$abc123hash012', 12),
+('bsmith',     '$2b$12$abc123hash013', 13),
+('mgonzalez',  '$2b$12$abc123hash014', 14),
+('dmartinez',  '$2b$12$abc123hash015', 15),
+('jbrown',     '$2b$12$abc123hash016', 16),
+('lreyes',     '$2b$12$abc123hash017', 17),
+('edavis',     '$2b$12$abc123hash018', 18),
+('fruiz',      '$2b$12$abc123hash019', 19),
+('swilson',    '$2b$12$abc123hash020', 20),
+('pmorales',   '$2b$12$abc123hash021', 21),
+('ataylor',    '$2b$12$abc123hash022', 22),
+('rvega',      '$2b$12$abc123hash023', 23),
+('mflores',    '$2b$12$abc123hash024', 24),
+('janderson',  '$2b$12$abc123hash025', 25);
+
 -- Ventas 
 INSERT INTO ventas (fecha, total, id_cliente, id_empleado) VALUES
 ('2025-01-05',  4620.00,  1,  1),

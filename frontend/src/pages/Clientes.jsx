@@ -94,7 +94,7 @@ export default function Clientes() {
                 </Button>
             </Box>
 
-            <TableContainer component={Paper} elevation={0} sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+            <TableContainer component={Paper} elevation={0} sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 3, overflowX: 'auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>

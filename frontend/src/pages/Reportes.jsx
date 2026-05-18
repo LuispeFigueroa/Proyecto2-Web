@@ -12,7 +12,7 @@ function TabPanel({ value, index, children }) {
 
 function ReportTable({ columns, rows, keyField }) {
     return (
-        <TableContainer component={Paper} elevation={0} sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 2 }}>
+        <TableContainer component={Paper} elevation={0} sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 3, overflowX: 'auto' }}>
             <Table size="small">
                 <TableHead>
                     <TableRow>
