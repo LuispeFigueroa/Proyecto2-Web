@@ -92,15 +92,34 @@ docker compose down -v
 | Base de datos | tienda_db |
 | Host | db |
 
-### Usuarios de la aplicacion
+## Autenticacion
 
-La pantalla de login muestra los usuarios disponibles. Cualquier contraseña es valida.
+La aplicacion usa bcrypt para hashear las contrasenas. Ningun password se guarda en texto plano.
 
-| Usuario | Cargo |
-|---|---|
-| sherrera | Vendedor |
-| cmendez | Gerente |
-| rsilva | Vendedora |
+### Login
+Ingresa con tu usuario y contrasena en la pantalla de login. La sesion se mantiene activa usando React Context y localStorage.
+
+### Crear cuenta
+Un empleado nuevo puede registrarse en `/register`. El formulario crea el empleado y su cuenta de acceso en una sola transaccion. Se requiere:
+
+- Nombre completo
+- Cargo
+- Email
+- Usuario
+- Contrasena (minimo 6 caracteres)
+
+### Usuarios de prueba
+
+Todos los usuarios de prueba tienen la contrasena `password123`.
+
+| Usuario | Nombre | Cargo |
+|---|---|---|
+| cmendez | Carlos Mendez | Gerente |
+| sherrera | Sofia Herrera | Vendedora |
+| mtorres | Miguel Torres | Vendedor |
+| agarcia | Ana Garcia | Cajera |
+| rsilva | Roberto Silva | Vendedor |
+
 ---
 
 ## Estructura del proyecto

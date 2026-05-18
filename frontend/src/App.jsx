@@ -8,6 +8,7 @@ import Ventas from './pages/Ventas'
 import Reportes from './pages/Reportes'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Register from './pages/Register'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/clientes" element={<ProtectedRoute><Clientes /></ProtectedRoute>} />
           <Route path="/ventas" element={<ProtectedRoute><Ventas /></ProtectedRoute>} />
           <Route path="/reportes" element={<ProtectedRoute><Reportes /></ProtectedRoute>} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Box>
     </Box>

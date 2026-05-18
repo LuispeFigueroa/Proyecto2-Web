@@ -3,10 +3,10 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package*.json .
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
 EXPOSE 5173
 
-CMD ["sh", "-c", "npm run dev -- --host & sleep 4 && echo '' && echo '  Pagina corriendo en: http://localhost:5173' && echo '' && wait"]
+CMD ["npm", "run", "dev", "--", "--host"]

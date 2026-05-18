@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Box, Paper, Typography, TextField, Button, Alert } from '@mui/material'
 import { useAuth } from '../context/AuthContext'
 import api from '../api/axios'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Login() {
     const [username, setUsername] = useState('')
@@ -71,6 +71,12 @@ export default function Login() {
                         Cualquier contraseña es válida
                     </Typography>
                 </Box>
+                <Typography sx={{ fontSize: 13, color: '#6b6b55', textAlign: 'center', mt: 2 }}>
+                    ¿Eres empleado nuevo?{' '}
+                    <Link to="/register" style={{ color: '#42273B', fontWeight: 600 }}>
+                        Crea tu cuenta
+                    </Link>
+                </Typography>
             </Paper>
         </Box>
     )
