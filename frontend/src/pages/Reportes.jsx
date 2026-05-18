@@ -39,6 +39,31 @@ function ReportTable({ columns, rows, keyField }) {
     )
 }
 
+function DownloadBar({ datos, nombre }) {
+    const handleDownload = () => {
+        if (!datos || datos.length === 0) return
+        const headers = Object.keys(datos[0]).join(',')
+        const rows = datos.map(row =>
+            Object.values(row).map(val => `"${val ?? ''}"`).join(',')
+        ).join('\n')
+        const blob = new Blob([`${headers}\n${rows}`], { type: 'text/csv;charset=utf-8;' })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `${nombre}.csv`
+        link.click()
+        URL.revokeObjectURL(url)
+    }
+
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
+            <Button size="small" variant="outlined" disabled={!datos || datos.length === 0} onClick={handleDownload}>
+                Descargar CSV
+            </Button>
+        </Box>
+    )
+}
+
 export default function Reportes() {
     const [tab, setTab] = useState(0)
     const [loading, setLoading] = useState(false)
@@ -73,22 +98,6 @@ export default function Reportes() {
         load(() => api.get(`/reportes/ventas-por-periodo?desde=${desde}&hasta=${hasta}`).then(r => setVentasPeriodo(r.data)))
     }
 
-    const exportarCSV = (datos, nombre) => {
-        if (!datos || datos.length === 0) return
-        const headers = Object.keys(datos[0]).join(',')
-        const rows = datos.map(row =>
-            Object.values(row).map(val => `"${val}"`).join(',')
-        ).join('\n')
-        const csv = `${headers}\n${rows}`
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement('a')
-        link.href = url
-        link.download = `${nombre}.csv`
-        link.click()
-        URL.revokeObjectURL(url)
-    }
-
     const q = val => `Q${parseFloat(val || 0).toFixed(2)}`
 
     return (
@@ -119,6 +128,7 @@ export default function Reportes() {
             {!loading && (
                 <>
                     <TabPanel value={tab} index={0}>
+                        <DownloadBar datos={ventasMes} nombre="ventas-por-mes" />
                         <ReportTable
                             keyField="mes"
                             columns={[
@@ -131,6 +141,7 @@ export default function Reportes() {
                     </TabPanel>
 
                     <TabPanel value={tab} index={1}>
+                        <DownloadBar datos={topProductos} nombre="top-productos" />
                         <ReportTable
                             keyField="producto"
                             columns={[
@@ -145,6 +156,7 @@ export default function Reportes() {
                     </TabPanel>
 
                     <TabPanel value={tab} index={2}>
+                        <DownloadBar datos={ventasCliente} nombre="ventas-por-cliente" />
                         <ReportTable
                             keyField="cliente"
                             columns={[
@@ -169,17 +181,20 @@ export default function Reportes() {
                             </Button>
                         </Box>
                         {ventasPeriodo.length > 0 && (
-                            <ReportTable
-                                keyField="id_venta"
-                                columns={[
-                                    { key: 'id_venta', label: 'ID' },
-                                    { key: 'fecha', label: 'Fecha' },
-                                    { key: 'cliente', label: 'Cliente' },
-                                    { key: 'empleado', label: 'Empleado' },
-                                    { key: 'total', label: 'Total', highlight: true, format: q },
-                                ]}
-                                rows={ventasPeriodo}
-                            />
+                            <>
+                                <DownloadBar datos={ventasPeriodo} nombre={`ventas-${desde}-${hasta}`} />
+                                <ReportTable
+                                    keyField="id_venta"
+                                    columns={[
+                                        { key: 'id_venta', label: 'ID' },
+                                        { key: 'fecha', label: 'Fecha' },
+                                        { key: 'cliente', label: 'Cliente' },
+                                        { key: 'empleado', label: 'Empleado' },
+                                        { key: 'total', label: 'Total', highlight: true, format: q },
+                                    ]}
+                                    rows={ventasPeriodo}
+                                />
+                            </>
                         )}
                     </TabPanel>
 
@@ -187,6 +202,7 @@ export default function Reportes() {
                         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
                             Datos obtenidos desde la vista <code>vista_ventas_detalladas</code>
                         </Typography>
+                        <DownloadBar datos={vistaVentas} nombre="vista-ventas-detalladas" />
                         <ReportTable
                             keyField="id_venta"
                             columns={[
@@ -207,6 +223,7 @@ export default function Reportes() {
                         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
                             Clientes que han comprado guitarras — consulta con subquery <code>IN</code>
                         </Typography>
+                        <DownloadBar datos={clientesGuitarristas} nombre="clientes-guitarristas" />
                         <ReportTable
                             keyField="id_cliente"
                             columns={[
@@ -223,6 +240,7 @@ export default function Reportes() {
                         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
                             Productos que nunca han sido vendidos — consulta con <code>NOT EXISTS</code>
                         </Typography>
+                        <DownloadBar datos={productosSinVentas} nombre="productos-sin-ventas" />
                         <ReportTable
                             keyField="id_producto"
                             columns={[
