@@ -3,7 +3,7 @@ from database import get_connection
 
 router = APIRouter()
 
-@router.get("/")
+@router.get("")
 def get_empleados():
     conn = get_connection()
     cur = conn.cursor()

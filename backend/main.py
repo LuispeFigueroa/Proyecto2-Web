@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import productos, clientes, ventas, reportes, auth, empleados
 
-app = FastAPI(title="Tienda LP")
+app = FastAPI(title="Tienda LP", redirect_slashes=False)
 
 app.add_middleware(
     CORSMiddleware,

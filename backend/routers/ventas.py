@@ -17,7 +17,7 @@ class VentaBase(BaseModel):
     fecha: Optional[date] = None
     detalle: List[DetalleItem]
 
-@router.get("/")
+@router.get("")
 def get_ventas():
     conn = get_connection()
     cur = conn.cursor()
@@ -71,7 +71,7 @@ def get_venta(id_venta: int):
 
 
 #transaccion para crear vetnas 
-@router.post("/", status_code=201)
+@router.post("", status_code=201)
 def crear_venta(v: VentaBase):
     if not v.detalle:
         raise HTTPException(status_code=400, detail="La venta debe tener al menos un producto")

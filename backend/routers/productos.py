@@ -13,7 +13,7 @@ class ProductoBase(BaseModel):
     id_proveedor: int
 
 #Get de todos los productos 
-@router.get("/")
+@router.get("")
 def get_productos():
     conn = get_connection()
     cur = conn.cursor()
@@ -55,7 +55,7 @@ def get_producto(id_producto: int):
         conn.close() 
 
 #post para crear un producto
-@router.post("/", status_code = 201)
+@router.post("", status_code=201)
 def crear_producto(p: ProductoBase):
     conn = get_connection()
     cur = conn.cursor()

@@ -11,7 +11,7 @@ class ClienteBase(BaseModel):
     telefono: Optional[str] = None
     direccion: Optional[str] = None
 
-@router.get("/")
+@router.get("")
 def get_clientes():
     conn = get_connection()
     cur = conn.cursor()
@@ -42,7 +42,7 @@ def get_cliente(id_cliente: int):
         cur.close()
         conn.close()
 
-@router.post("/", status_code=201)
+@router.post("", status_code=201)
 def crear_cliente(c: ClienteBase):
     conn = get_connection()
     cur = conn.cursor()
