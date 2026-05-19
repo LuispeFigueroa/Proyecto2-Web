@@ -43,6 +43,7 @@ CREATE TABLE empleados (
     nombre         VARCHAR(150) NOT NULL,
     cargo          VARCHAR(100) NOT NULL,
     email          VARCHAR(100),
+    rol          VARCHAR(20) NOT NULL DEFAULT 'rol_vendedor',
     fecha_contrato DATE NOT NULL
 );
  
@@ -98,6 +99,51 @@ JOIN clientes c       ON c.id_cliente  = v.id_cliente
 JOIN empleados e      ON e.id_empleado = v.id_empleado
 JOIN detalle_venta dv ON dv.id_venta   = v.id_venta
 JOIN productos p      ON p.id_producto = dv.id_producto;
+
+
+
+-- ROLES DE BASE DE DATOS
+
+-- Crear roles
+CREATE ROLE rol_gerente;
+CREATE ROLE rol_vendedor;
+CREATE ROLE rol_cajero;
+CREATE ROLE rol_bodeguero;
+CREATE ROLE rol_contador;
+
+-- Gerente — acceso total
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO rol_gerente;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO rol_gerente;
+
+-- Vendedor — crear ventas, ver productos y clientes
+GRANT SELECT, INSERT, UPDATE ON productos TO rol_vendedor;
+GRANT SELECT ON categorias TO rol_vendedor;
+GRANT SELECT ON proveedores TO rol_vendedor;
+GRANT SELECT, INSERT ON clientes TO rol_vendedor;
+GRANT SELECT, INSERT ON ventas TO rol_vendedor;
+GRANT SELECT, INSERT ON detalle_venta TO rol_vendedor;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO rol_vendedor;
+
+-- Cajero — solo ver y procesar ventas
+GRANT SELECT ON ventas TO rol_cajero;
+GRANT SELECT ON detalle_venta TO rol_cajero;
+GRANT SELECT ON clientes TO rol_cajero;
+GRANT SELECT ON productos TO rol_cajero;
+GRANT SELECT ON empleados TO rol_cajero;
+
+-- Bodeguero — ver y actualizar stock
+GRANT SELECT, UPDATE ON productos TO rol_bodeguero;
+GRANT SELECT ON categorias TO rol_bodeguero;
+GRANT SELECT ON proveedores TO rol_bodeguero;
+
+-- Contador — solo lectura de reportes y ventas
+GRANT SELECT ON ventas TO rol_contador;
+GRANT SELECT ON detalle_venta TO rol_contador;
+GRANT SELECT ON productos TO rol_contador;
+GRANT SELECT ON clientes TO rol_contador;
+GRANT SELECT ON empleados TO rol_contador;
+GRANT SELECT ON categorias TO rol_contador;
+
  
 -- ============================================================
 -- DATOS DE PRUEBA (Generados con IA)
@@ -194,33 +240,32 @@ INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_prov
  
 -- Empleados 
 -- Empleados (25)
-INSERT INTO empleados (nombre, cargo, email, fecha_contrato) VALUES
-('Carlos Mendez',      'Gerente',       'cmendez@tiendamusical.com',    '2020-01-15'),
-('Sofia Herrera',      'Vendedora',     'sherrera@tiendamusical.com',   '2020-03-10'),
-('Miguel Torres',      'Vendedor',      'mtorres@tiendamusical.com',    '2021-06-01'),
-('Ana Garcia',         'Cajera',        'agarcia@tiendamusical.com',    '2021-08-20'),
-('Roberto Silva',      'Vendedor',      'rsilva@tiendamusical.com',     '2022-01-10'),
-('Laura Castillo',     'Vendedora',     'lcastillo@tiendamusical.com',  '2022-03-15'),
-('Diego Ramirez',      'Bodeguero',     'dramirez@tiendamusical.com',   '2022-05-01'),
-('Valentina Cruz',     'Vendedora',     'vcruz@tiendamusical.com',      '2022-07-20'),
-('Andres Lopez',       'Vendedor',      'alopez@tiendamusical.com',     '2022-09-01'),
-('Gabriela Mora',      'Cajera',        'gmora@tiendamusical.com',      '2022-11-15'),
-('Kevin Johnson',      'Vendedor',      'kjohnson@tiendamusical.com',   '2023-01-10'),
-('Ashley Williams',    'Vendedora',     'awilliams@tiendamusical.com',  '2023-02-20'),
-('Brandon Smith',      'Tecnico',       'bsmith@tiendamusical.com',     '2023-04-01'),
-('Maria Gonzalez',     'Vendedora',     'mgonzalez@tiendamusical.com',  '2023-05-15'),
-('Daniel Martinez',    'Vendedor',      'dmartinez@tiendamusical.com',  '2023-07-01'),
-('Jessica Brown',      'Recepcionista', 'jbrown@tiendamusical.com',     '2023-08-10'),
-('Luis Reyes',         'Vendedor',      'lreyes@tiendamusical.com',     '2023-09-01'),
-('Emily Davis',        'Contadora',     'edavis@tiendamusical.com',     '2023-10-15'),
-('Fernando Ruiz',      'Vendedor',      'fruiz@tiendamusical.com',      '2023-11-01'),
-('Stephanie Wilson',   'Vendedora',     'swilson@tiendamusical.com',    '2024-01-10'),
-('Pablo Morales',      'Bodeguero',     'pmorales@tiendamusical.com',   '2024-02-01'),
-('Amanda Taylor',      'Vendedora',     'ataylor@tiendamusical.com',    '2024-03-15'),
-('Ricardo Vega',       'Tecnico',       'rvega@tiendamusical.com',      '2024-04-01'),
-('Monica Flores',      'Vendedora',     'mflores@tiendamusical.com',    '2024-05-10'),
-('James Anderson',     'Vendedor',      'janderson@tiendamusical.com',  '2024-06-01');
-
+INSERT INTO empleados (nombre, cargo, email, rol, fecha_contrato) VALUES
+('Carlos Mendez',    'Gerente',       'cmendez@tiendamusical.com',   'rol_gerente',   '2020-01-15'),
+('Sofia Herrera',    'Vendedora',     'sherrera@tiendamusical.com',  'rol_vendedor',  '2020-03-10'),
+('Miguel Torres',    'Vendedor',      'mtorres@tiendamusical.com',   'rol_vendedor',  '2021-06-01'),
+('Ana Garcia',       'Cajera',        'agarcia@tiendamusical.com',   'rol_cajero',    '2021-08-20'),
+('Roberto Silva',    'Vendedor',      'rsilva@tiendamusical.com',    'rol_vendedor',  '2022-01-10'),
+('Laura Castillo',   'Vendedora',     'lcastillo@tiendamusical.com', 'rol_vendedor',  '2022-03-15'),
+('Diego Ramirez',    'Bodeguero',     'dramirez@tiendamusical.com',  'rol_bodeguero', '2022-05-01'),
+('Valentina Cruz',   'Vendedora',     'vcruz@tiendamusical.com',     'rol_vendedor',  '2022-07-20'),
+('Andres Lopez',     'Vendedor',      'alopez@tiendamusical.com',    'rol_vendedor',  '2022-09-01'),
+('Gabriela Mora',    'Cajera',        'gmora@tiendamusical.com',     'rol_cajero',    '2022-11-15'),
+('Kevin Johnson',    'Vendedor',      'kjohnson@tiendamusical.com',  'rol_vendedor',  '2023-01-10'),
+('Ashley Williams',  'Vendedora',     'awilliams@tiendamusical.com', 'rol_vendedor',  '2023-02-20'),
+('Brandon Smith',    'Tecnico',       'bsmith@tiendamusical.com',    'rol_vendedor',  '2023-04-01'),
+('Maria Gonzalez',   'Vendedora',     'mgonzalez@tiendamusical.com', 'rol_vendedor',  '2023-05-15'),
+('Daniel Martinez',  'Vendedor',      'dmartinez@tiendamusical.com', 'rol_vendedor',  '2023-07-01'),
+('Jessica Brown',    'Recepcionista', 'jbrown@tiendamusical.com',    'rol_cajero',    '2023-08-10'),
+('Luis Reyes',       'Vendedor',      'lreyes@tiendamusical.com',    'rol_vendedor',  '2023-09-01'),
+('Emily Davis',      'Contadora',     'edavis@tiendamusical.com',    'rol_contador',  '2023-10-15'),
+('Fernando Ruiz',    'Vendedor',      'fruiz@tiendamusical.com',     'rol_vendedor',  '2023-11-01'),
+('Stephanie Wilson', 'Vendedora',     'swilson@tiendamusical.com',   'rol_vendedor',  '2024-01-10'),
+('Pablo Morales',    'Bodeguero',     'pmorales@tiendamusical.com',  'rol_bodeguero', '2024-02-01'),
+('Amanda Taylor',    'Vendedora',     'ataylor@tiendamusical.com',   'rol_vendedor',  '2024-03-15'),
+('Ricardo Vega',     'Tecnico',       'rvega@tiendamusical.com',     'rol_bodeguero', '2024-04-01'),
+('Monica Flores',    'Vendedora',     'mflores@tiendamusical.com',   'rol_vendedor',  '2024-05-10'),
+('James Anderson',   'Vendedor',      'janderson@tiendamusical.com', 'rol_vendedor',  '2024-06-01');
  
 -- Clientes 
 INSERT INTO clientes (nombre, email, telefono, direccion) VALUES
@@ -335,3 +380,4 @@ INSERT INTO detalle_venta (cantidad, precio_unitario, id_venta, id_producto) VAL
 (1, 1800.00,24, 14),
 (1, 9800.00,25,  9);
  
+-- Usuario: proy3 / secret
