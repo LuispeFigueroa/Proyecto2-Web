@@ -121,6 +121,74 @@ Todos los usuarios de prueba tienen la contrasena `password123`.
 | rsilva | Roberto Silva | Vendedor |
 
 ---
+## Roles y permisos
+
+El sistema define 5 roles directamente en PostgreSQL mediante `CREATE ROLE` con permisos granulares por tabla asignados con `GRANT` y `REVOKE`.
+
+### rol_gerente
+Acceso total a todas las tablas y operaciones. Corresponde al cargo de Gerente.
+
+| Tabla | Permisos |
+|---|---|
+| Todas | SELECT, INSERT, UPDATE, DELETE |
+
+### rol_vendedor
+Puede crear ventas, registrar clientes y consultar el inventario. Corresponde a vendedores.
+
+| Tabla | Permisos |
+|---|---|
+| productos | SELECT, INSERT, UPDATE |
+| categorias | SELECT |
+| proveedores | SELECT |
+| clientes | SELECT, INSERT |
+| ventas | SELECT, INSERT |
+| detalle_venta | SELECT, INSERT |
+
+### rol_cajero
+Solo puede consultar ventas y datos relacionados. No puede crear ni modificar nada. Corresponde a cajeros y recepcionistas.
+
+| Tabla | Permisos |
+|---|---|
+| ventas | SELECT |
+| detalle_venta | SELECT |
+| clientes | SELECT |
+| productos | SELECT |
+| empleados | SELECT |
+
+### rol_bodeguero
+Puede ver y actualizar el stock de productos. No tiene acceso a ventas ni clientes. Corresponde a bodegueros y tecnicos.
+
+| Tabla | Permisos |
+|---|---|
+| productos | SELECT, UPDATE |
+| categorias | SELECT |
+| proveedores | SELECT |
+
+### rol_contador
+Solo lectura general. Puede ver reportes y ventas pero no puede modificar nada. Corresponde a contadores.
+
+| Tabla | Permisos |
+|---|---|
+| ventas | SELECT |
+| detalle_venta | SELECT |
+| productos | SELECT |
+| clientes | SELECT |
+| empleados | SELECT |
+| categorias | SELECT |
+
+---
+
+## Usuarios de prueba por rol
+
+Un usuario funcional por cada rol para verificar el esquema de permisos.
+
+| Usuario | Contrasena | Rol | Cargo |
+|---|---|---|---|
+| cmendez | password123 | rol_gerente | Gerente |
+| sherrera | password123 | rol_vendedor | Vendedora |
+| agarcia | password123 | rol_cajero | Cajera |
+| dramirez | password123 | rol_bodeguero | Bodeguero |
+| edavis | password123 | rol_contador | Contadora |
 
 ## Estructura del proyecto
 
