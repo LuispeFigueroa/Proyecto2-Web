@@ -19,16 +19,38 @@ Desarrollada con React, FastAPI y PostgreSQL. Desplegada mediante Docker.
 
 ---
 
-## Requisitos
+## Version en produccion
+
+La aplicacion esta desplegada y disponible en:
+
+| Servicio | URL |
+|---|---|
+| Aplicacion web | https://proyecto2-web.vercel.app |
+| API | https://proyecto2-web-production.up.railway.app |
+| Documentacion API | https://proyecto2-web-production.up.railway.app/docs |
+
+### Usuarios de prueba (produccion)
+
+Todos los usuarios tienen la contrasena `password123`.
+
+| Usuario | Nombre | Cargo |
+|---|---|---|
+| cmendez | Carlos Mendez | Gerente |
+| sherrera | Sofia Herrera | Vendedora |
+| mtorres | Miguel Torres | Vendedor |
+| agarcia | Ana Garcia | Cajera |
+| edavis | Emily Davis | Contadora |
+
+---
+
+## Correr localmente
+
+### Requisitos
 
 - Docker Desktop instalado y corriendo
 - Git
 
-No se requiere instalar Python, Node.js ni ninguna otra dependencia de forma local. Docker se encarga de todo.
-
----
-
-## Instrucciones para correr el proyecto
+No se requiere instalar Python, Node.js ni ninguna otra dependencia. Docker se encarga de todo.
 
 ### 1. Clonar el repositorio
 
@@ -51,21 +73,21 @@ El archivo `.env` ya viene con las credenciales correctas. No es necesario modif
 docker compose up --build
 ```
 
-Este comando levanta los tres servicios automáticamente:
+Este comando levanta los tres servicios automaticamente:
 
 - Base de datos PostgreSQL, inicializada con el esquema y datos de prueba
 - Backend FastAPI
 - Frontend React
 
-### 4. Acceder a la aplicación
+La primera vez puede tardar unos minutos mientras Docker descarga las imagenes.
 
-Una vez que los tres servicios estén corriendo, abrir en el navegador:
+### 4. Acceder a la aplicacion
 
 | Servicio | URL |
 |---|---|
-| Aplicación web | http://localhost:5173 |
+| Aplicacion web | http://localhost:5173 |
 | API | http://localhost:8000 |
-| Documentación API | http://localhost:8000/docs |
+| Documentacion API | http://localhost:8000/docs |
 
 ### 5. Detener el proyecto
 
@@ -73,7 +95,7 @@ Una vez que los tres servicios estén corriendo, abrir en el navegador:
 docker compose down
 ```
 
-Para eliminar también los datos almacenados:
+Para eliminar tambien los datos almacenados:
 
 ```bash
 docker compose down -v
@@ -92,9 +114,28 @@ docker compose down -v
 | Base de datos | tienda_db |
 | Host | db |
 
+---
+
 ## Autenticacion
 
 La aplicacion usa bcrypt para hashear las contrasenas. Ningun password se guarda en texto plano.
+
+### Login
+Ingresa con tu usuario y contrasena en la pantalla de login. La sesion se mantiene activa usando React Context y localStorage.
+
+### Crear cuenta
+Un empleado nuevo puede registrarse en `/register`. El formulario crea el empleado y su cuenta de acceso en una sola transaccion. Se requiere:
+
+- Nombre completo
+- Cargo
+- Email
+- Usuario
+- Contrasena (minimo 6 caracteres)
+
+### Seguridad
+- Las contrasenas se hashean con bcrypt antes de guardarse en la base de datos
+- La verificacion de contrasena se hace comparando el hash, nunca el texto plano
+- Las rutas del frontend estan protegidas con React Router y AuthContext
 
 ### Login
 Ingresa con tu usuario y contrasena en la pantalla de login. La sesion se mantiene activa usando React Context y localStorage.
